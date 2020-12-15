@@ -1,5 +1,31 @@
+// var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson"
+
+
+// d3.json(queryUrl, function(data) {
+//     // Once we get a response, send the data.features object to the createFeatures function
+//     createFeatures(data.features);
+//   });
+  
+
+//   function createFeatures(earthquakeData) {
+
+//     // Define a function we want to run once for each feature in the features array
+//     // Give each feature a popup describing the place and time of the earthquake
+//     function onEachFeature(feature, layer) {
+//       layer.bindPopup("<h3>" + feature.properties.place +
+//         "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+//     }
+  
+//     // Create a GeoJSON layer containing the features array on the earthquakeData object
+//     // Run the onEachFeature function once for each piece of data in the array
+//     var earthquakes = L.geoJSON(earthquakeData, {
+//       onEachFeature: onEachFeature
+//     });
+  
+  
+
 var myMap = L.map('map', {
-    center: [0, 0],
+    center: [37.09, -95.71],
     zoom: 5
     // minZoom: 1,
     // maxZoom: 1
@@ -11,44 +37,12 @@ var myMap = L.map('map', {
     tileSize: 512,
     maxZoom: 18,
     zoomOffset: -1,
-    id: "mapbox/streets-v11",
+    id: "mapbox/light-v10",
     accessToken: API_KEY
   }).addTo(myMap);
-  myMap.fitWorld();
 
-  // An array containing each city's name, location, and population
-// var cities = [{
-//     location: [40.7128, -74.0059],
-//     name: "New York",
-//     population: "8,550,405"
-//   },
-//   {
-//     location: [41.8781, -87.6298],
-//     name: "Chicago",
-//     population: "2,720,546"
-//   },
-//   {
-//     location: [29.7604, -95.3698],
-//     name: "Houston",
-//     population: "2,296,224"
-//   },
-//   {
-//     location: [34.0522, -118.2437],
-//     name: "Los Angeles",
-//     population: "3,971,883"
-//   },
-//   {
-//     location: [41.2524, -95.9980],
-//     name: "Omaha",
-//     population: "446,599"
-//   }
-//   ];
-  
-//   // Loop through the cities array and create one marker for each city, bind a popup containing its name and population add it to the map
-//   for (var i = 0; i < cities.length; i++) {
-//     var city = cities[i];
-//     L.marker(city.location)
-//       .bindPopup("<h1>" + city.name + "</h1> <hr> <h3>Population " + city.population + "</h3>")
-//       .addTo(myMap);
-//   }
-  
+  var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson"
+
+  d3.json(url , function(response) {
+    console.log(response);
+  }); 
