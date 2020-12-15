@@ -41,8 +41,29 @@ var myMap = L.map('map', {
     accessToken: API_KEY
   }).addTo(myMap);
 
-  var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson"
+  // var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
+
+  var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
   d3.json(url , function(response) {
     console.log(response);
+    
+    var features = response.features;
+
+    console.log(features);
+
+    // var markers = L.markerClusterGroup();
+
+    for (var i = 0; i < features.length; i++) {
+      var location = features[i].geometry;
+  
+      if (location) {
+        L.circle([location.coordinates[1], location.coordinates[0]]).addTo(myMap);
+
+      }
+    }
+  
+
+    // myMap.addLayer(markers);
+    
   }); 
