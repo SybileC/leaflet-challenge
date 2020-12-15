@@ -43,6 +43,8 @@ var myMap = L.map('map', {
 
   var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
+  var geojson;
+
   d3.json(url , function(response) {
     console.log(response);
     
@@ -52,15 +54,19 @@ var myMap = L.map('map', {
 
     // var markers = L.markerClusterGroup();
 
+    // function sizing()
+
     for (var i = 0; i < features.length; i++) {
       var location = features[i].geometry;
+
+      var properties = features[i].properties;
   
       if (location) {
         L.circle([location.coordinates[1], location.coordinates[0]], {
-          color: "white",
+          color: "black",
           // fillColor: "#f03",
           // fillOpacity: 0.5,
-          radius: 20
+          radius: properties.mag * 10000
       }).addTo(myMap);
 
       }
