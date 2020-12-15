@@ -66,7 +66,7 @@ var myMap = L.map('map', {
           color: "black",
           // fillColor: "#f03",
           // fillOpacity: 0.5,
-          radius: properties.mag * 10000
+          radius: properties.mag * 15000
       }).addTo(myMap);
 
       }
