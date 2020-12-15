@@ -41,8 +41,6 @@ var myMap = L.map('map', {
     accessToken: API_KEY
   }).addTo(myMap);
 
-  // var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson";
-
   var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
   d3.json(url , function(response) {
@@ -59,7 +57,7 @@ var myMap = L.map('map', {
   
       if (location) {
         L.circle([location.coordinates[1], location.coordinates[0]], {
-          // color: "red",
+          color: "white",
           // fillColor: "#f03",
           // fillOpacity: 0.5,
           radius: 20
