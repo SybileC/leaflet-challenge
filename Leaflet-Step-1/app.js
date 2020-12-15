@@ -58,7 +58,12 @@ var myMap = L.map('map', {
       var location = features[i].geometry;
   
       if (location) {
-        L.circle([location.coordinates[1], location.coordinates[0]]).addTo(myMap);
+        L.circle([location.coordinates[1], location.coordinates[0]], {
+          // color: "red",
+          // fillColor: "#f03",
+          // fillOpacity: 0.5,
+          radius: 20
+      }).addTo(myMap);
 
       }
     }
