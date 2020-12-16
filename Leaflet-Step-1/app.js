@@ -64,11 +64,9 @@ var myMap = L.map('map', {
           fillColor: chooseColor(location.coordinates[2]),
           fillOpacity: 1,
           radius: properties.mag * 15000
-      }).addTo(myMap).on("click", function getInfo() {
-        // return "<h1>" + properties.place + "</h1>";
-        alert("You clicked the map at " + properties.place );
-        circle.bindPopup("<h1>" + properties.place + "</h1>" + "<br>" + "Magnitude:" + properties.mag + "<br>" + "Duration:" + properties.dmin)
-      });
+      }).addTo(myMap)
+      
+      circle.bindPopup("<h1>" + properties.place + "</h1>" + "<br>" + "Magnitude: " + properties.mag + "<br>" + "Duration: " + properties.dmin);
 
       }
     }
