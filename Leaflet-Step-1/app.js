@@ -57,7 +57,7 @@ var myMap = L.map('map', {
       var properties = features[i].properties;
 
       if (location) {
-        L.circle([location.coordinates[1], location.coordinates[0]], {
+        var circle = L.circle([location.coordinates[1], location.coordinates[0]], {
           stroke: true,
           weight: 0.5,
           color: "black",
@@ -65,7 +65,9 @@ var myMap = L.map('map', {
           fillOpacity: 1,
           radius: properties.mag * 15000
       }).addTo(myMap).on("click", function getInfo() {
-        return "<h1>" + features.properties.place + "</h1>"
+        // return "<h1>" + properties.place + "</h1>";
+        alert("You clicked the map at " + properties.place );
+        circle.bindPopup("<h1>" + properties.place + "</h1>" + "<br>" + "Magnitude:" + properties.mag + "<br>" + "Duration:" + properties.dmin)
       });
 
       }
