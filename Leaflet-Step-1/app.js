@@ -58,9 +58,21 @@ var myMap = L.map('map', {
           radius: properties.mag * 15000
       }).addTo(myMap)
       
-      circle.bindPopup("<h1>" + properties.place + "</h1>" + "<br>" + "Magnitude: " + properties.mag + "<br>" + "Duration: " + properties.dmin);
+      circle.bindPopup(properties.place + "<br>" + "Magnitude: " + properties.mag + "<br>" + "Duration: " + properties.dmin + " minutes");
 
       }
     }
     
   }); 
+
+  // function updateLegend(depth) {
+  //   div.innerHTML = [
+  //     "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
+  //     "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
+  //     "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
+  //     "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
+  //     "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
+  //     "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
+  //   ].join("");
+  // }
+  
