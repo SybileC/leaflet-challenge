@@ -1,8 +1,6 @@
 var myMap = L.map('map', {
     center: [37.09, -95.71],
     zoom: 5
-    // minZoom: 1,
-    // maxZoom: 1
  });
   
   // Add a tile layer
@@ -16,8 +14,6 @@ var myMap = L.map('map', {
   }).addTo(myMap);
 
   var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
-
-  // var geojson;
 
   d3.json(url , function(response) {
     console.log(response);
@@ -46,10 +42,6 @@ var myMap = L.map('map', {
           return "#f54242";
       }
     };
-
-    // function getInfo() {
-    //   return "<h1>" + features.properties.place + "</h1>";
-    // };
 
     for (var i = 0; i < features.length; i++) {
       var location = features[i].geometry;
