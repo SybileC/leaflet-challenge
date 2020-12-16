@@ -54,40 +54,30 @@ var myMap = L.map('map', {
 
     // var markers = L.markerClusterGroup();
 
-    // function chooseColor()
+    // function chooseColor()  
 
-    var location = features[i].geometry;
-
-    var properties = features[i].properties;
-    
+  
     var color = L.choropleth(response, {
       valueProperty: "#e9f542",
-
+  
       scale: ["#e9f542", "#5df542"],
-
+  
       steps: 10
+  
+    });
 
-  // // q for quartile, e for equidistant, k for k-means
-  // mode: "q",
-  // style: {
-  //   // Border color
-  //   // color: "#fff",
-  //   // weight: 1,
-  //   fillOpacity: 0.8
-
-  });
-
+    
     for (var i = 0; i < features.length; i++) {
-      // var location = features[i].geometry;
+      var location = features[i].geometry;
 
-      // var properties = features[i].properties;
+      var properties = features[i].properties;
 
       if (location) {
-        L.circle([location.coordinates[1], location.coordinates[0]], {
+        var circle = L.circle([location.coordinates[1], location.coordinates[0]], {
           stroke: true,
           weight: 0.5,
           color: "black",
-          fillColor: color,
+          fillColor: color.location.coordinates[2],
           // fillOpacity: 0.5,
           radius: properties.mag * 15000
       }).addTo(myMap);
@@ -95,7 +85,21 @@ var myMap = L.map('map', {
       }
     }
 
+  //   var color = L.choropleth(response, {
+  //     valueProperty: "#e9f542",
   
+  //     scale: ["#e9f542", "#5df542"],
+  
+  //     steps: 10
+  
+  //   });
+
+  //   onEachFeature: function(location) {
+  //     layer.bindPopup("Zip Code: " + feature.properties.ZIP + "<br>Median Household Income:<br>" +
+  //       "$" + feature.properties.MHI2016);
+  //   }
+  // }).addTo(myMap);
+
 
     // myMap.addLayer(markers);
     
