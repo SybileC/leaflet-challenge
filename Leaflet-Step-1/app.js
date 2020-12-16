@@ -1,29 +1,3 @@
-// var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson"
-
-
-// d3.json(queryUrl, function(data) {
-//     // Once we get a response, send the data.features object to the createFeatures function
-//     createFeatures(data.features);
-//   });
-  
-
-//   function createFeatures(earthquakeData) {
-
-//     // Define a function we want to run once for each feature in the features array
-//     // Give each feature a popup describing the place and time of the earthquake
-//     function onEachFeature(feature, layer) {
-//       layer.bindPopup("<h3>" + feature.properties.place +
-//         "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
-//     }
-  
-//     // Create a GeoJSON layer containing the features array on the earthquakeData object
-//     // Run the onEachFeature function once for each piece of data in the array
-//     var earthquakes = L.geoJSON(earthquakeData, {
-//       onEachFeature: onEachFeature
-//     });
-  
-  
-
 var myMap = L.map('map', {
     center: [37.09, -95.71],
     zoom: 5
@@ -52,42 +26,45 @@ var myMap = L.map('map', {
 
     console.log(features);
 
-  function chooseColor(earthquakeDepth) {
-      if (earthquakeDepth >= -10 && earthquakeDepth < 10) {
-        return "#93f542";
+    function chooseColor(earthquakeDepth) {
+        if (earthquakeDepth >= -10 && earthquakeDepth < 10) {
+          return "#93f542";
+        }
+        else if (earthquakeDepth >= 10 && earthquakeDepth < 30) {
+          return "#bcf542";
+        }
+        else if (earthquakeDepth >= 30 && earthquakeDepth < 50) {
+          return "#e9f542";
+        }
+        else if (earthquakeDepth >= 50 && earthquakeDepth < 70) {
+          return "#f5b042";
+        }
+        else if (earthquakeDepth >= 70 && earthquakeDepth < 90) {
+          return "#f57e42";
+        }
+        else {
+          return "#f54242";
       }
-      else if (earthquakeDepth >= 10 && earthquakeDepth < 30) {
-        return "#bcf542";
-      }
-      else if (earthquakeDepth >= 30 && earthquakeDepth < 50) {
-        return "#e9f542";
-      }
-      else if (earthquakeDepth >= 50 && earthquakeDepth < 70) {
-        return "#f5b042";
-      }
-      else if (earthquakeDepth >= 70 && earthquakeDepth < 90) {
-        return "#f57e42";
-      }
-      else {
-        return "#f54242";
-    }
-  };
+    };
 
-    
+    function getInfo(circle) {
+      return properties.place;
+    };
+
     for (var i = 0; i < features.length; i++) {
       var location = features[i].geometry;
 
       var properties = features[i].properties;
 
       if (location) {
-        var circle = L.circle([location.coordinates[1], location.coordinates[0]], {
+        L.circle([location.coordinates[1], location.coordinates[0]], {
           stroke: true,
           weight: 0.5,
           color: "black",
           fillColor: chooseColor(location.coordinates[2]),
           fillOpacity: 1,
           radius: properties.mag * 15000
-      }).addTo(myMap);
+      }).addTo(myMap).on("click", getInfo);
 
       }
     }
