@@ -56,23 +56,45 @@ var myMap = L.map('map', {
 
     // function chooseColor()
 
-    for (var i = 0; i < features.length; i++) {
-      var location = features[i].geometry;
+    var location = features[i].geometry;
 
-      var properties = features[i].properties;
-  
+    var properties = features[i].properties;
+    
+    var color = L.choropleth(response, {
+      valueProperty: "#e9f542",
+
+      scale: ["#e9f542", "#5df542"],
+
+      steps: 10
+
+  // // q for quartile, e for equidistant, k for k-means
+  // mode: "q",
+  // style: {
+  //   // Border color
+  //   // color: "#fff",
+  //   // weight: 1,
+  //   fillOpacity: 0.8
+
+  });
+
+    for (var i = 0; i < features.length; i++) {
+      // var location = features[i].geometry;
+
+      // var properties = features[i].properties;
+
       if (location) {
         L.circle([location.coordinates[1], location.coordinates[0]], {
           stroke: true,
           weight: 0.5,
           color: "black",
-          // fillColor: "#f03",
+          fillColor: color,
           // fillOpacity: 0.5,
           radius: properties.mag * 15000
       }).addTo(myMap);
 
       }
     }
+
   
 
     // myMap.addLayer(markers);
