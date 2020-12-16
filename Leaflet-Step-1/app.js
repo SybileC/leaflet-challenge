@@ -65,14 +65,27 @@ var myMap = L.map('map', {
     
   }); 
 
-  // function updateLegend(depth) {
-  //   div.innerHTML = [
-  //     "<p>Updated: " + moment.unix(time).format("h:mm:ss A") + "</p>",
-  //     "<p class='out-of-order'>Out of Order Stations: " + stationCount.OUT_OF_ORDER + "</p>",
-  //     "<p class='coming-soon'>Stations Coming Soon: " + stationCount.COMING_SOON + "</p>",
-  //     "<p class='empty'>Empty Stations: " + stationCount.EMPTY + "</p>",
-  //     "<p class='low'>Low Stations: " + stationCount.LOW + "</p>",
-  //     "<p class='healthy'>Healthy Stations: " + stationCount.NORMAL + "</p>"
-  //   ].join("");
-  // }
+  var legend = L.control({ position: "bottomright" });
+  legend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+    // var limits = geojson.options.limits;
+    var colors = ["#93f542", "#bcf542", "#e9f542", "#f5b042", "#f57e42", "#f54242"];
+    var labels = [];
+
+    var legendInfo = "<div>" + "-10 - 10" + "</div>" +
+    "<div>" + "10 - 30" + "</div>" + "<div>" + "30 - 50" + "</div>" + 
+    "<div>" + "50 - 70" + "</div>" + "<div>" + "70 - 90" + "</div>" +
+    "<div>" + "90+" + "</div>";
+
+  div.innerHTML = legendInfo;
+
+  for (var i = 0; i < colors.length; i++) {
+    labels.push("<li style=\"background-color: " + colors[i] + "\"></li>");
+  };
+
+  div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+  return div;
+};
+
+
   
