@@ -43,7 +43,7 @@ var myMap = L.map('map', {
 
   var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 
-  var geojson;
+  // var geojson;
 
   d3.json(url , function(response) {
     console.log(response);
@@ -52,19 +52,26 @@ var myMap = L.map('map', {
 
     console.log(features);
 
-    // var markers = L.markerClusterGroup();
-
-    // function chooseColor()  
-
-  
-    var color = L.choropleth(response, {
-      valueProperty: "#e9f542",
-  
-      scale: ["#e9f542", "#5df542"],
-  
-      steps: 10
-  
-    });
+  function chooseColor(earthquakeDepth) {
+      if (earthquakeDepth >= -10 && earthquakeDepth < 10) {
+        return "#93f542";
+      }
+      else if (earthquakeDepth >= 10 && earthquakeDepth < 30) {
+        return "#bcf542";
+      }
+      else if (earthquakeDepth >= 30 && earthquakeDepth < 50) {
+        return "#e9f542";
+      }
+      else if (earthquakeDepth >= 50 && earthquakeDepth < 70) {
+        return "#f5b042";
+      }
+      else if (earthquakeDepth >= 70 && earthquakeDepth < 90) {
+        return "#f57e42";
+      }
+      else {
+        return "#f54242";
+    }
+  };
 
     
     for (var i = 0; i < features.length; i++) {
@@ -77,30 +84,12 @@ var myMap = L.map('map', {
           stroke: true,
           weight: 0.5,
           color: "black",
-          fillColor: color.location.coordinates[2],
-          // fillOpacity: 0.5,
+          fillColor: chooseColor(location.coordinates[2]),
+          fillOpacity: 1,
           radius: properties.mag * 15000
       }).addTo(myMap);
 
       }
     }
-
-  //   var color = L.choropleth(response, {
-  //     valueProperty: "#e9f542",
-  
-  //     scale: ["#e9f542", "#5df542"],
-  
-  //     steps: 10
-  
-  //   });
-
-  //   onEachFeature: function(location) {
-  //     layer.bindPopup("Zip Code: " + feature.properties.ZIP + "<br>Median Household Income:<br>" +
-  //       "$" + feature.properties.MHI2016);
-  //   }
-  // }).addTo(myMap);
-
-
-    // myMap.addLayer(markers);
     
   }); 
