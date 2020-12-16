@@ -54,7 +54,7 @@ var myMap = L.map('map', {
 
     // var markers = L.markerClusterGroup();
 
-    // function sizing()
+    // function chooseColor()
 
     for (var i = 0; i < features.length; i++) {
       var location = features[i].geometry;
@@ -63,6 +63,8 @@ var myMap = L.map('map', {
   
       if (location) {
         L.circle([location.coordinates[1], location.coordinates[0]], {
+          stroke: true,
+          weight: 0.5,
           color: "black",
           // fillColor: "#f03",
           // fillOpacity: 0.5,
