@@ -47,9 +47,9 @@ var myMap = L.map('map', {
       }
     };
 
-    function getInfo(circle) {
-      return properties.place;
-    };
+    // function getInfo() {
+    //   return "<h1>" + features.properties.place + "</h1>";
+    // };
 
     for (var i = 0; i < features.length; i++) {
       var location = features[i].geometry;
@@ -64,7 +64,9 @@ var myMap = L.map('map', {
           fillColor: chooseColor(location.coordinates[2]),
           fillOpacity: 1,
           radius: properties.mag * 15000
-      }).addTo(myMap).on("click", getInfo);
+      }).addTo(myMap).on("click", function getInfo() {
+        return "<h1>" + features.properties.place + "</h1>"
+      });
 
       }
     }
