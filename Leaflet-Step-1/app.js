@@ -68,8 +68,7 @@ var myMap = L.map('map', {
     legend.onAdd = function (map) {
 
         var div = L.DomUtil.create('div', 'info legend'),
-            depth = [-10, 10, 30, 50, 70, 90],
-            labels = [];
+            depth = [-10, 10, 30, 50, 70, 90]
 
         for (var i = 0; i < depth.length; i++) {
             div.innerHTML +=
