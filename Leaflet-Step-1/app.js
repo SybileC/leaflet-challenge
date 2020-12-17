@@ -65,27 +65,40 @@ var myMap = L.map('map', {
     
   }); 
 
-  var legend = L.control({ position: "bottomright" });
-  legend.onAdd = function() {
-    var div = L.DomUtil.create("div", "info legend");
-    // var limits = geojson.options.limits;
-    var colors = ["#93f542", "#bcf542", "#e9f542", "#f5b042", "#f57e42", "#f54242"];
-    var labels = [];
+//   var legend = L.control({ position: "bottomright" });
+//   legend.onAdd = function() {
+//     var div = L.DomUtil.create("div", "info legend");
+//     // var limits = geojson.options.limits;
+//     var colors = ["#93f542", "#bcf542", "#e9f542", "#f5b042", "#f57e42", "#f54242"];
+//     var labels = ["-10 - 10", "10 - 30", "30 - 50", "50 - 70", "70 - 90", "90+"];
 
-    var legendInfo = "<div>" + "-10 - 10" + "</div>" +
-    "<div>" + "10 - 30" + "</div>" + "<div>" + "30 - 50" + "</div>" + 
-    "<div>" + "50 - 70" + "</div>" + "<div>" + "70 - 90" + "</div>" +
-    "<div>" + "90+" + "</div>";
+//     // var legendInfo = "<div>" + "-10 - 10" + "</div>" +
+//     // "<div>" + "10 - 30" + "</div>" + "<div>" + "30 - 50" + "</div>" + 
+//     // "<div>" + "50 - 70" + "</div>" + "<div>" + "70 - 90" + "</div>" +
+//     // "<div>" + "90+" + "</div>";
 
-  div.innerHTML = legendInfo;
+//   // div.innerHTML = legendInfo;
 
-  for (var i = 0; i < colors.length; i++) {
-    labels.push("<li style=\"background-color: " + colors[i] + "\"></li>");
-  };
+//   for (var i = 0; i < colors.length; i++) {
+//     labels.push("<li style=\"background-color: " + colors[i] + "\">testing</li>");
+//   };
 
-  div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-  return div;
+//   div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+//   return div;
+// };
+
+// legend.addTo(map);
+
+var legend = L.control({position: 'bottomright'});
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+    return div;
 };
-
-
-  
+legend.addTo(myMap);
