@@ -89,16 +89,57 @@ var myMap = L.map('map', {
 
 // legend.addTo(map);
 
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-        labels = [];
-    // loop through our density intervals and generate a label with a colored square for each interval
-    for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-    }
-    return div;
+// var legend = L.control({position: 'bottomright'});
+// legend.onAdd = function (map) {
+//     var div = L.DomUtil.create('div', 'info legend'),
+//         depth = [-10, 10, 30, 50, 70, 90],
+//         labels = [];
+//     // loop through our density intervals and generate a label with a colored square for each interval
+//     for (var i = 0; i < depth.length; i++) {
+//         div.innerHTML +=
+//             depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+//     }
+//     return div;
+// };
+// legend.addTo(myMap);
+
+function chooseColor(earthquakeDepth) {
+  if (earthquakeDepth >= -10 && earthquakeDepth < 10) {
+    return "#93f542";
+  }
+  else if (earthquakeDepth >= 10 && earthquakeDepth < 30) {
+    return "#bcf542";
+  }
+  else if (earthquakeDepth >= 30 && earthquakeDepth < 50) {
+    return "#e9f542";
+  }
+  else if (earthquakeDepth >= 50 && earthquakeDepth < 70) {
+    return "#f5b042";
+  }
+  else if (earthquakeDepth >= 70 && earthquakeDepth < 90) {
+    return "#f57e42";
+  }
+  else {
+    return "#f54242";
+}
 };
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        depth = [-10, 10, 30, 50, 70, 90],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < depth.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + chooseColor(depth[i] + 1) + '"></i> ' +
+           depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
 legend.addTo(myMap);
