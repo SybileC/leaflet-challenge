@@ -67,18 +67,17 @@ var myMap = L.map('map', {
 
     legend.onAdd = function (map) {
 
-       var div = L.DomUtil.create('div', 'info legend'),
-           depth = [-10, 10, 30, 50, 70, 90],
-           labels = [];
+        var div = L.DomUtil.create('div', 'info legend'),
+            depth = [-10, 10, 30, 50, 70, 90],
+            labels = [];
 
-       for (var i = 0; i < depth.length; i++) {
-        labels.push('<i style="background:' + chooseColor(depth[i] + 1) + '"></i> ');
-        div.innerHTML +=
-                   '<ul>' + labels.join("") + '</ul>' +
-              depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
-       }
+        for (var i = 0; i < depth.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + chooseColor(depth[i] + 1) + '"></i> ' +
+                depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+        }
 
-       return div;
+        return div;
     };
 
     legend.addTo(myMap);
